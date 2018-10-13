@@ -4,13 +4,13 @@ http://blog.auska.win
 ## Usage
 
 ```
-docker create --name=verysync \
+docker create --name=aria2 \
 -v <path to downloads>:/mnt \
--v <path to verysync>:/verysync \
+-v <path to config>:/config \
 -e PGID=<gid> -e PUID=<uid> \
 -e TZ=<timezone> \
--p 8886:8886 -p 22330:22330 \
-auska/docker-verysync
+-p 6800:6800 -p 80:80 \
+auska/docker-aria2
 ```
 
 ### User / Group Identifiers
