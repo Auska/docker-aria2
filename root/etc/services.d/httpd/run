@@ -1,4 +1,4 @@
 #!/usr/bin/with-contenv bash
 
 exec \
-	s6-setuidgid abc darkhttpd /webui --port 80
+	s6-setuidgid root darkhttpd /webui --port 80

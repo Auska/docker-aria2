@@ -1,12 +1,20 @@
 #!/usr/bin/with-contenv bash
 
+mkdir -p /webui /mnt
+
 # copy
 
-[[ ! -f /usr/bin/aria2c ]] && tar Jxf /defaults/aria2c.tar.xz -C /usr/bin/
+if [[ ! -f /usr/bin/aria2c ]]; then
+	tar Jxf /defaults/aria2c.tar.xz -C /usr/bin/
+fi
 
-[[ ! -f /webui/index.html ]] && unzip /defaults/ariang.zip -d /webui
+if [[ ! -f /webui/index.html ]]; then
+	unzip /defaults/ariang.zip -d /webui
+fi
 
-[[ ! -f /config/aria2.conf ]] && cp /defaults/aria2.conf /config/aria2.conf
+if [[ ! -f /config/aria2.conf ]]; then 
+	cp /defaults/aria2.conf /config/aria2.conf
+fi
 
 # permissions
 chown abc:abc -R \

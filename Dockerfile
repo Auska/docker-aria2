@@ -10,7 +10,7 @@ ENV TZ=Asia/Shanghai
 
 RUN \
 	echo "**** install packages ****" && \
-	apk add --no-cache darkhttpd unzip
+	apk add --no-cache darkhttpd unzip 
 
 # copy local files
 COPY root/ /
