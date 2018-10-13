@@ -6,15 +6,18 @@ ARG VERSION
 LABEL build_version="blog.auska.win version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="Auska"
 
-ENV TZ=Asia/Shanghai ARIA2_VERSION=1.34.0
+ENV TZ=Asia/Shanghai ARIA2_VERSION=1.34.0 ARIANG_VERSION=0.5.0
 
 RUN \
 	echo "**** install packages ****" \
 	&& sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
-	&& apk add --no-cache darkhttpd \
+	&& apk add --no-cache darkhttpd unzip \
 	&& apk add --no-cache --virtual .build-deps build-base curl \
 	&& apk add --no-cache --virtual .persistent-deps ca-certificates zlib-dev openssl-dev expat-dev sqlite-dev c-ares-dev libssh2-dev \
 	&& cd /tmp \
+	&& curl -fSL https://github.com/mayswind/AriaNg/releases/download/${ARIANG_VERSION}/AriaNg-${ARIANG_VERSION}.zip -o ariang.zip \
+	&& mkdir -p /webui \
+	&& unzip ariang.zip -d /webui \
 	&& curl -fSL https://github.com/aria2/aria2/releases/download/release-${ARIA2_VERSION}/aria2-${ARIA2_VERSION}.tar.xz -o aria2.tar.xz \
 	&& tar xJf aria2.tar.xz \
 	&& cd aria2-${ARIA2_VERSION} \
