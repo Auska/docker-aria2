@@ -4,17 +4,11 @@ mkdir -p /webui /mnt
 
 # copy
 
-if [[ ! -f /usr/bin/aria2c ]]; then
-	tar Jxf /defaults/aria2c.tar.xz -C /usr/bin/
-fi
+[[ ! -f /usr/bin/aria2c ]] && Jxf /defaults/aria2c.tar.xz -C /usr/bin/
 
-if [[ ! -f /webui/index.html ]]; then
-	unzip /defaults/ariang.zip -d /webui
-fi
+[[ ! -f /webui/index.html ]] && unzip /defaults/ariang.zip -d /webui
 
-if [[ ! -f /config/aria2.conf ]]; then 
-	cp /defaults/aria2.conf /config/aria2.conf
-fi
+[[ ! -f /config/aria2.conf ]] && cp /defaults/aria2.conf /config/aria2.conf
 
 # permissions
 chown abc:abc -R \
