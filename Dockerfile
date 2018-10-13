@@ -13,7 +13,7 @@ RUN \
 	$$ sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
 	&& apk add --no-cache darkhttpd \
 	&& apk add --no-cache --virtual .build-deps build-base curl \
-	&& apk add --no-cache --virtual .persistent-deps ca-certificates zlib-dev openssl1.0-dev expat-dev sqlite-dev c-ares-dev libssh2-dev \
+	&& apk add --no-cache --virtual .persistent-deps ca-certificates zlib-dev openssl-dev expat-dev sqlite-dev c-ares-dev libssh2-dev \
 	&& cd /tmp \
 	&& curl -fSL https://github.com/aria2/aria2/releases/download/release-${ARIA2_VERSION}/aria2-${ARIA2_VERSION}.tar.xz -o aria2.tar.xz \
 	&& tar xJf aria2.tar.xz \
