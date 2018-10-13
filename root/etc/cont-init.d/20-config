@@ -4,7 +4,7 @@ mkdir -p /webui /mnt
 
 # copy
 
-[[ ! -f /usr/bin/aria2c ]] && Jxf /defaults/aria2c.tar.xz -C /usr/bin/
+[[ ! -f /usr/bin/aria2c ]] && tar Jxf /defaults/aria2c.tar.xz -C /usr/bin/
 
 [[ ! -f /webui/index.html ]] && unzip /defaults/ariang.zip -d /webui
 
