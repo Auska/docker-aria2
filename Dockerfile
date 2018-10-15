@@ -13,7 +13,7 @@ RUN \
 	&& sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
 	&& apk add --no-cache darkhttpd unzip \
 	&& apk add --no-cache --virtual .build-deps build-base curl \
-	&& apk add --no-cache --virtual .persistent-deps ca-certificates zlib-dev openssl-dev expat-dev sqlite-dev c-ares-dev libssh2-dev \
+	&& apk add --no-cache ca-certificates zlib-dev openssl-dev expat-dev sqlite-dev c-ares-dev libssh2-dev \
 	&& cd /tmp \
 	&& curl -fSL https://github.com/mayswind/AriaNg/releases/download/${ARIANG_VERSION}/AriaNg-${ARIANG_VERSION}.zip -o ariang.zip \
 	&& mkdir -p /webui \

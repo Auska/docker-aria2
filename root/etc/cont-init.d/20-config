@@ -10,5 +10,5 @@ mkdir -p /webui /mnt
 
 # permissions
 chown abc:abc -R \
-	/webui
+	/webui \
 	/mnt
