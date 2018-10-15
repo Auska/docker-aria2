@@ -22,9 +22,9 @@ RUN \
 	&& tar xJf aria2.tar.xz \
 	&& cd aria2-${ARIA2_VERSION} \
 	&& sed -i 's|"1", 1, 16,|"8", 1, -1,|g' src/OptionHandlerFactory.cc \
-	&& ./configure \
+	&& ./configure --enable-static \
 	&& make -j$(getconf _NPROCESSORS_ONLN) \
-	&& make install \
+	&& make install-strip \
 	&& apk del .build-deps \
 	&& rm -rf /tmp
 
