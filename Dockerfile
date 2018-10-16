@@ -22,7 +22,7 @@ RUN \
 	&& tar xJf aria2.tar.xz \
 	&& cd aria2-${ARIA2_VERSION} \
 	&& sed -i 's|"1", 1, 16,|"8", 1, -1,|g' src/OptionHandlerFactory.cc \
-	&& ./configure --enable-static --disable-shared \
+	&& ./configure --host=x86_64-alpine-linux-musl --enable-static --disable-shared \
 	&& make -j$(getconf _NPROCESSORS_ONLN) \
 	&& make install-strip \
 	&& apk del .build-deps .libc-deps \
