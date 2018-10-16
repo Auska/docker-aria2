@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv bash
 
 exec \
-	s6-setuidgid abc aria2c --conf-path=/etc/aria2/aria2.conf \
+	s6-setuidgid abc aria2c --conf-path=/config/aria2.conf \
 		--rpc-listen-port=6800 \
 		--dir=/mnt
