@@ -13,7 +13,7 @@ RUN \
 	&& sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
 	&& apk add --no-cache darkhttpd unzip \
 	&& apk add --no-cache --virtual .build-deps build-base curl \
-	&& apk add --no-cache --virtual .libc-deps ca-certificates zlib-dev openssl-dev expat-dev sqlite-dev c-ares-dev libssh2-dev \
+	&& apk add --no-cache ca-certificates zlib-dev openssl-dev expat-dev sqlite-dev c-ares-dev libssh2-dev \
 	&& cd /tmp \
 	&& curl -fSL https://github.com/mayswind/AriaNg/releases/download/${ARIANG_VERSION}/AriaNg-${ARIANG_VERSION}.zip -o ariang.zip \
 	&& mkdir -p /webui \
@@ -22,10 +22,11 @@ RUN \
 	&& tar xJf aria2.tar.xz \
 	&& cd aria2-${ARIA2_VERSION} \
 	&& sed -i 's|"1", 1, 16,|"8", 1, -1,|g' src/OptionHandlerFactory.cc \
-	&& ./configure --host=x86_64-alpine-linux-musl --enable-static --disable-shared --with-ca-bundle='/etc/ssl/certs/ca-certificates.crt' ARIA2_STATIC=yes \
+	&& ./configure --host=x86_64-alpine-linux-musl \
 	&& make -j$(getconf _NPROCESSORS_ONLN) \
 	&& make install-strip \
-	&& apk del .build-deps .libc-deps \
+	&& apk del .build-deps \
+	&& apk add libstdc++ \
 	&& rm -rf /tmp
 
 # copy local files
