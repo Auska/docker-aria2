@@ -1,6 +1,8 @@
 #!/usr/bin/with-contenv bash
 
 mkdir -p /webui /mnt
+chmod +x /config/trackers-list-update.sh
+/config/trackers-list-update.sh 2>&1
 
 # copy
 
@@ -10,5 +12,4 @@ mkdir -p /webui /mnt
 
 # permissions
 chown abc:abc -R \
-	/webui \
 	/mnt
