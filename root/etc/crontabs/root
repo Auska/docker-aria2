@@ -2,4 +2,4 @@
 # min   hour    day     month   weekday command
 
 # run daily trackers-list update
-0 3 * * * /config/trackers-list-update.sh 2>&1
+0 3 * * * /defaults/trackers-list-update.sh 2>&1

@@ -6,7 +6,7 @@ ARG VERSION
 LABEL build_version="blog.auska.win version:1.34.0"
 LABEL maintainer="Auska"
 
-ENV TZ=Asia/Shanghai SECRET=Auska
+ENV TZ=Asia/Shanghai SECRET=admin
 
 RUN \
 	echo "**** install packages ****" \
