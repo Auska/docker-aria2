@@ -13,4 +13,5 @@ chmod +x /defaults/trackers-list-update.sh
 
 # permissions
 chown abc:abc -R \
-	/mnt
+	/mnt \
+	/config
