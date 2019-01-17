@@ -2,13 +2,14 @@
 
 mkdir -p /webui /mnt
 chmod +x /defaults/trackers-list-update.sh
-/defaults/trackers-list-update.sh 2>&1
 
 # copy
 
 [[ ! -f /config/aria2.conf ]] && cp /defaults/aria2.conf /config/aria2.conf
 
 [[ ! -f /config/aria2.session ]] && touch /config/aria2.session
+
+/defaults/trackers-list-update.sh 2>&1
 
 # permissions
 chown abc:abc -R \
