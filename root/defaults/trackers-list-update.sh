@@ -8,6 +8,13 @@ then
     tracker_url=$TRACKER_URL
 fi
 
+aria2_url=http://localhost:6800/jsonrpc
+
+if [ $URL"x" != "x" ]
+then
+    aria2_url=$URL
+fi
+
 list=$(curl -s $tracker_url)
 url_list=$(echo $list | sed 's/[ ][ ]*/,/g')
 echo $url_list
@@ -16,7 +23,7 @@ echo $url_list
 # pack json
 #uuid=$(cat /proc/sys/kernel/random/uuid)
 uuid=$(od -x /dev/urandom | head -1 | awk '{OFS="-"; print $2$3,$4,$5,$6,$7$8$9}')
-token="$ARIA2_TOKEN"
+token="$SECRET"
 json='{
     "jsonrpc": "2.0",
     "method": "aria2.changeGlobalOption",
@@ -31,10 +38,10 @@ json='{
 
 
 # post json
-echo "$ARIA2_URL"
+echo "$aria2_url"
 echo $json
 curl -H "Accept: application/json" \
     -H "Content-type: application/json" \
     -X POST \
     -d "$json" \
-    -s "$ARIA2_URL"
+    -s "$aria2_url"
