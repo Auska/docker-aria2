@@ -8,8 +8,8 @@ docker create --name=aria2 \
 -v <path to downloads>:/mnt \
 -v <path to config>:/config \
 -e PGID=<gid> -e PUID=<uid> \
--e TZ=<timezone> \
--p 6800:6800 -p 80:80 \
+-e TZ=<timezone> -e SECRET=<admin> \
+-p 6800:6800 \
 auska/docker-aria2
 ```
 
