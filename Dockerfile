@@ -10,7 +10,7 @@ ENV TZ=Asia/Shanghai SECRET=admin
 
 RUN \
 	echo "**** install packages ****" \
-	&& apk add --no-cache aria2
+	&& apk add --no-cache aria2 curl
 
 # copy local files
 COPY root/ /
