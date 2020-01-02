@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # get url_list
-tracker_url='https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt'
+tracker_url='https://cdn.jsdelivr.net/gh/ngosang/trackerslist/trackers_best.txt'
 
 if [ $TRACKER_URL"x" != "x" ]
 then

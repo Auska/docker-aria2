@@ -16,13 +16,13 @@ chmod +x /defaults/trackers-list-update.sh
 chown abc:abc /config/aria2.conf /config/aria2.session /config/dht.dat /config/dht6.dat
 
 # add tracker
-tmp=`curl https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt`
+tmp=`curl https://cdn.jsdelivr.net/gh/ngosang/trackerslist/trackers_best.txt`
 list=`echo $tmp | sed 's/[ ][ ]*/,/g'`
-if [ -z "`grep "bt-tracker" /root/.aria2/aria2.conf`" ]; then
-    sed -i '$a bt-tracker='${list} /root/.aria2/aria2.conf
+if [ -z "`grep "bt-tracker" /config/aria2.conf`" ]; then
+    sed -i '$a bt-tracker='${list} /config/aria2.conf
     echo add tracker ...
 else
-    sed -i "s@bt-tracker.*@bt-tracker=$list@g" /root/.aria2/aria2.conf
+    sed -i "s@bt-tracker.*@bt-tracker=$list@g" /config/aria2.conf
     echo update tracker ...
 fi
 
