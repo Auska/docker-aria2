@@ -15,7 +15,7 @@ then
     aria2_url=$URL
 fi
 
-list=$(curl $tracker_url)
+list=$(curl -s $tracker_url)
 url_list=$(echo $list | sed 's/[ ][ ]*/,/g')
 echo $url_list
 
