@@ -15,7 +15,7 @@ then
     aria2_url=$URL
 fi
 
-list=$(curl -s $tracker_url)
+list=$(curl $tracker_url)
 url_list=$(echo $list | sed 's/[ ][ ]*/,/g')
 echo $url_list
 
@@ -23,7 +23,7 @@ echo $url_list
 # pack json
 #uuid=$(cat /proc/sys/kernel/random/uuid)
 uuid=$(od -x /dev/urandom | head -1 | awk '{OFS="-"; print $2$3,$4,$5,$6,$7$8$9}')
-token="$SECRET"
+token=$SECRET
 json='{
     "jsonrpc": "2.0",
     "method": "aria2.changeGlobalOption",
@@ -38,7 +38,7 @@ json='{
 
 
 # post json
-echo "$aria2_url"
+echo $aria2_url
 echo $json
 curl -H "Accept: application/json" \
     -H "Content-type: application/json" \
