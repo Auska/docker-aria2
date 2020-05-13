@@ -1,7 +1,7 @@
-# My Blog
+# 我的博客
 http://blog.auska.win
 
-## Usage
+## 创建镜像
 
 ```
 docker create --name=aria2 \
@@ -9,21 +9,23 @@ docker create --name=aria2 \
 -v <path to config>:/config \
 -e PGID=<gid> -e PUID=<uid> \
 -e TZ=<timezone> -e SECRET=<admin> \
--p 6800:6800 \
+-e RPC=<6800> PORT=<16881> \
+-p 6800:6800 -p 16881:16881 \
 auska/docker-aria2
 ```
 
-### User / Group Identifiers
+## 参数解释
 
-Sometimes when using data volumes (`-v` flags) permissions issues can arise between the host OS and the container. We avoid this issue by allowing you to specify the user `PUID` and group `PGID`. Ensure the data volume directory on the host is owned by the same user you specify and it will "just work" ™.
+* `-p 6800` PRC端口
+* `-p 16881` - BT软件通讯端口
+* `-v /config` - 配置文件目录
+* `-v /mnt` - 下载文件目录
+* `-e PGID` 用户的GroupID，留空为root
+* `-e PUID` 用户的UserID，留空为root
+* `-e SECRET` 登录密钥
+* `-e TZ` 时区 默认 Asia/Shanghai
 
-In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as below:
+## 版本介绍
 
-```
-  $ id <dockeruser>
-    uid=1001(dockeruser) gid=1001(dockergroup) groups=1001(dockergroup)
-```
-
-## Versions
-
-+ **0.0.1:** Rebase to alpine linux 3.8.
+latest ： 自带WEB。
+no-web ： 不包括WEB_UI。
