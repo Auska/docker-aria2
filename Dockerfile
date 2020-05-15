@@ -8,8 +8,9 @@ ARG  ARIA2_VER=1.35.0
 COPY  root /
 
 RUN  apk add --no-cache bash bash-completion build-base pkgconf autoconf automake libtool perl linux-headers \
-&&   bash /defaults/build.sh \
-&&   cp --parents /usr/local/bin/aria2c /aria2
+&&  bash /defaults/build.sh \
+&&  mkdir /aria2 \
+&&  cp --parents /usr/local/bin/aria2c /aria2
 
 # docker aria2 
 
