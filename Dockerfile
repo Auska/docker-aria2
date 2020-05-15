@@ -7,7 +7,7 @@ ARG  ARIA2_VER=1.35.0
 # copy local files
 COPY  root /
 
-RUN  apk add --no-cache ca-certificates make g++ gcc wget bash zlib-dev openssl-dev expat-dev sqlite-dev c-ares-dev libssh2-dev \
+RUN  apk add --no-cache bash bash-completion build-base pkgconf autoconf automake libtool perl linux-headers \
 &&   bash /defaults/build.sh \
 &&   cp --parents /usr/local/bin/aria2c /aria2
 
