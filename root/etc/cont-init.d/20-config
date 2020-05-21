@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bash
 
 mkdir -p /webui /mnt
-chmod +x /defaults/trackers-list-update.sh
+chmod +x /defaults/updatetrackers.sh
 
 # copy
 
