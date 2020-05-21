@@ -1,24 +1,13 @@
-#!/bin/sh
+#! /bin/sh
+
+if [ "$TRACKERSAUTO" == "YES" ];then
 
 # get url_list
 tracker_url='https://trackerslist.com/best.txt'
-
-if [ $TRACKER_URL"x" != "x" ]
-then
-    tracker_url=$TRACKER_URL
-fi
-
 aria2_url=http://localhost:6800/jsonrpc
-
-if [ $URL"x" != "x" ]
-then
-    aria2_url=$URL
-fi
 
 list=$(curl -s $tracker_url)
 url_list=$(echo $list | sed 's/[ ][ ]*/,/g')
-echo $url_list
-
 
 # pack json
 #uuid=$(cat /proc/sys/kernel/random/uuid)
@@ -36,12 +25,15 @@ json='{
     ]
 }'
 
-
 # post json
-echo $aria2_url
-echo $json
 curl -H "Accept: application/json" \
     -H "Content-type: application/json" \
     -X POST \
     -d "$json" \
     -s "$aria2_url"
+
+else
+
+echo "Update Tracker Exit ..."
+
+fi
