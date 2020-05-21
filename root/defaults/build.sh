@@ -92,8 +92,11 @@ cd $BUILD_DIRECTORY
   cd ..
   $DOWNLOADER $ARIA2
   tar xf aria2-${ARIA2_VER}.tar.xz
-  cd aria2-${ARIA2_VER}/
+  cd aria2-${ARIA2_VER}
+  sed -i '78a \      << "\\n"\n      << _("** Compile For Auska **") << "\\n"\n      << _("[My Blog] https://blog.auska.win/") << "\\n"' src/version_usage.cc
   sed -i 's/"1", 1, 16/"1", 1, 128/g' src/OptionHandlerFactory.cc
+  sed -i 's/"60", 0, 600/"60", 0, 3600/g' src/OptionHandlerFactory.cc
+  sed -i 's/builtinHds.emplace_back("Want-Digest:", wantDigest);//g' src/HttpRequest.cc
   PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig/ \
   LD_LIBRARY_PATH=$PREFIX/lib/ \
   ./configure \
