@@ -1,4 +1,4 @@
-FROM alpine:3.11 as compilingaria2c
+FROM alpine:3.12 as compilingaria2c
 
 #compiling aria2c
 
@@ -14,7 +14,7 @@ RUN  apk add --no-cache bash bash-completion build-base pkgconf autoconf automak
 
 # docker aria2 
 
-FROM lsiobase/alpine:3.11
+FROM lsiobase/alpine:3.12
 
 # set version label
 LABEL maintainer="Auska"
