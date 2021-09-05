@@ -2,7 +2,7 @@ FROM alpine:3.12 as compilingaria2c
 
 #compiling aria2c
 
-ARG  ARIA2_VER=1.35.0
+ARG  ARIA2_VER=1.36.0
 
 # copy local files
 COPY  root /

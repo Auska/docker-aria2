@@ -21,11 +21,11 @@ CXX_COMPILER="x86_64-alpine-linux-musl-g++"
 
 ## DEPENDENCES ##
 ZLIB=http://sourceforge.net/projects/libpng/files/zlib/1.2.11/zlib-1.2.11.tar.gz
-OPENSSL=https://www.openssl.org/source/openssl-1.1.1g.tar.gz
-EXPAT=https://github.com/libexpat/libexpat/releases/download/R_2_2_9/expat-2.2.9.tar.bz2
-SQLITE3=https://sqlite.org/2020/sqlite-autoconf-3310100.tar.gz
-C_ARES=https://github.com/c-ares/c-ares/releases/download/cares-1_16_1/c-ares-1.16.1.tar.gz
-SSH2=https://github.com/libssh2/libssh2/releases/download/libssh2-1.9.0/libssh2-1.9.0.tar.gz
+OPENSSL=https://www.openssl.org/source/openssl-1.1.1l.tar.gz
+EXPAT=https://github.com/libexpat/libexpat/releases/download/R_2_4_1/expat-2.4.1.tar.bz2
+SQLITE3=https://sqlite.org/2021/sqlite-autoconf-3360000.tar.gz
+C_ARES=https://github.com/c-ares/c-ares/releases/download/cares-1_17_2/c-ares-1.17.2.tar.gz
+SSH2=https://github.com/libssh2/libssh2/releases/download/libssh2-1.10.0/libssh2-1.10.0.tar.gz
 ARIA2=https://github.com/aria2/aria2/releases/download/release-${ARIA2_VER}/aria2-${ARIA2_VER}.tar.xz
 
 ## CONFIG ##
@@ -45,8 +45,8 @@ cd $BUILD_DIRECTORY
  # expat build
   cd ..
   $DOWNLOADER $EXPAT
-  tar jxvf expat-2.2.9.tar.bz2
-  cd expat-2.2.9/
+  tar jxvf expat-2.4.1.tar.bz2
+  cd expat-2.4.1/
   PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig/ LD_LIBRARY_PATH=$PREFIX/lib/ CC="$C_COMPILER" CXX="$CXX_COMPILER" ./configure --prefix=$PREFIX --enable-static --enable-shared
   make
   make install
@@ -54,8 +54,8 @@ cd $BUILD_DIRECTORY
  # c-ares build
   cd ..
   $DOWNLOADER $C_ARES
-  tar zxvf c-ares-1.16.1.tar.gz
-  cd c-ares-1.16.1/
+  tar zxvf c-ares-1.17.2.tar.gz
+  cd c-ares-1.17.2/
   PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig/ LD_LIBRARY_PATH=$PREFIX/lib/ CC="$C_COMPILER" CXX="$CXX_COMPILER" ./configure --prefix=$PREFIX --enable-static --disable-shared
   make
   make install
@@ -63,8 +63,8 @@ cd $BUILD_DIRECTORY
  # Openssl build
   cd ..
   $DOWNLOADER $OPENSSL
-  tar zxvf openssl-1.1.1g.tar.gz
-  cd openssl-1.1.1g/
+  tar zxvf openssl-1.1.1l.tar.gz
+  cd openssl-1.1.1l/
   PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig/ LD_LIBRARY_PATH=$PREFIX/lib/ CC="$C_COMPILER" CXX="$CXX_COMPILER" ./Configure --prefix=$PREFIX linux-x86_64 shared
   make
   make install
@@ -72,8 +72,8 @@ cd $BUILD_DIRECTORY
  # sqlite3
   cd ..
   $DOWNLOADER $SQLITE3
-  tar zxvf sqlite-autoconf-3310100.tar.gz
-  cd sqlite-autoconf-3310100/
+  tar zxvf sqlite-autoconf-3360000.tar.gz
+  cd sqlite-autoconf-3360000/
   PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig/ LD_LIBRARY_PATH=$PREFIX/lib/ CC="$C_COMPILER" CXX="$CXX_COMPILER" ./configure --prefix=$PREFIX --enable-static --enable-shared
   make
   make install
@@ -81,8 +81,8 @@ cd $BUILD_DIRECTORY
  # libssh2
   cd ..
   $DOWNLOADER $SSH2
-  tar zxvf libssh2-1.9.0.tar.gz
-  cd libssh2-1.9.0/
+  tar zxvf libssh2-1.10.0.tar.gz
+  cd libssh2-1.10.0/
   rm -rf $PREFIX/lib/pkgconfig/libssh2.pc
   PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig/ LD_LIBRARY_PATH=$PREFIX/lib/ CC="$C_COMPILER" CXX="$CXX_COMPILER" ./configure --without-libgcrypt --with-openssl --without-wincng --prefix=$PREFIX --enable-static --disable-shared
   make
