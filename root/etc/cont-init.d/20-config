@@ -26,7 +26,7 @@ if [ $MODE == "PT" ]; then
     sed -i "s@force-save=.*@force-save=true@g" /config/aria2.conf
     sed -i "s@bt-detach-seed-only=.*@bt-detach-seed-only=true@g" /config/aria2.conf
 else
-    sed -i "s@max-overall-upload-limit=.*@max-overall-upload-limit=1K@g" /config/aria2.conf
+    sed -i "s@max-overall-upload-limit=.*@max-overall-upload-limit=200K@g" /config/aria2.conf
     sed -i "s@enable-dht=.*@enable-dht=true@g" /config/aria2.conf
     sed -i "s@enable-dht6=.*@enable-dht6=true@g" /config/aria2.conf
     sed -i "s@bt-enable-lpd=.*@bt-enable-lpd=true@g" /config/aria2.conf
