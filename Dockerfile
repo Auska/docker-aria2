@@ -18,5 +18,5 @@ RUN \
 	&& apk add --no-cache curl darkhttpd
 
 # ports and volumes
-EXPOSE 6800 16881
+EXPOSE 6800 16881 80
 VOLUME /mnt /config
