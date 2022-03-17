@@ -14,6 +14,7 @@ COPY aria2c  /usr/bin/aria2c
 
 RUN \
 	echo "**** install packages ****" \
+	&& sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories \
 	&& apk add --no-cache curl
 
 # ports and volumes
