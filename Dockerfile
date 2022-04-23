@@ -6,7 +6,7 @@ ARG VERSION="1.36.0"
 LABEL build_version="version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="Auska"
 
-ENV TZ=Asia/Shanghai SECRET=admin WEB=80 RPC=6800 PORT=16881 TRACKERSAUTO=Yes MODE=BT
+ENV TZ=Asia/Shanghai SECRET=admin WEB=80 RPC=6800 PORT=16881 TRACKERSAUTO=Yes MODE=BT NO_Digest=true
 
 # copy local files
 COPY  root /

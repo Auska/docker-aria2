@@ -3,4 +3,4 @@
 exec \
 	s6-setuidgid abc aria2c --conf-path=/config/aria2.conf \
 		--rpc-listen-port=$RPC --listen-port=$PORT --dht-listen-port=$PORT \
-		--rpc-secret=$SECRET
+		--rpc-secret=$SECRET --no-want-digest-header=$NO_Digest
