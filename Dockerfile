@@ -1,12 +1,17 @@
 FROM ghcr.io/linuxserver/baseimage-alpine:edge
 
 # set version label
-ARG BUILD_DATE="2023-12-10"
-ARG VERSION="1.37.0"
+ARG BUILD_DATE="2025-08-17"
+ARG VERSION="1.37.0-1"
 LABEL build_version="version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="Auska"
 
-ENV TZ=Asia/Shanghai SECRET=admin WEB=80 RPC=6800 PORT=16881 TRACKERSAUTO=Yes MODE=BT
+ENV TZ=Asia/Shanghai
+ENV WEB=80
+ENV RPC=6800
+ENV PORT=16881 
+ENV TRACKERSAUTO=Yes
+ENV MODE=BT
 
 # copy local files
 COPY  root /
@@ -20,4 +25,4 @@ RUN \
 
 # ports and volumes
 EXPOSE 6800 16881 80
-VOLUME /mnt /config
+VOLUME /downloads /config
