@@ -69,6 +69,7 @@ services:
 | `SECRET` | `admin` | RPC 密钥 |
 | `RPC` | `6800` | RPC 端口 |
 | `PORT` | `16881` | BT 监听端口 |
+| `WEB` | `80` | WebUI 端口 |
 | `DOWNLOAD` | `/downloads` | 下载目录 |
 | `TZ` | `Asia/Shanghai` | 时区 |
 | `BTINCLUDE` | `-,A2` | BT Peer ID 白名单 |
@@ -76,6 +77,7 @@ services:
 
 ## 端口说明
 
+- `80`：WebUI 端口（默认）
 - `6800`：RPC 端口（默认）
 - `16881`：BT 监听端口（默认）
 
