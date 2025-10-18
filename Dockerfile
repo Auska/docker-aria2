@@ -4,6 +4,7 @@ ENV GOSU_VERSION=1.16
 ENV TZ=Asia/Shanghai
 ENV DOWNLOAD=/downloads
 ENV MODE=BT
+ENV WEB=80
 ENV RPC=6800
 ENV PORT=16881
 ENV UID=1000
@@ -13,19 +14,22 @@ ENV BTEXCLUDE="-SD,-XF,-QD,-BN,-DL,-XL"
 
 # copy local files
 COPY app /app
+COPY app/www /www
 COPY aria2c /usr/bin/aria2c
+COPY althttpd /usr/bin/althttpd
 
 RUN \
 	sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories && \
     apk add --no-cache curl && \
     chmod +x /app/entrypoint.sh && \
-    chmod +x /usr/bin/aria2c
+    chmod +x /usr/bin/aria2c && \
+    chmod +x /usr/bin/althttpd
 
 RUN curl -L "https://gh-proxy.net/https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64" -o /usr/bin/gosu && \
     chmod +x /usr/bin/gosu
 
 # ports and volumes
-EXPOSE 6800 16881
+EXPOSE 80 6800 16881
 VOLUME /downloads /config
 
 ENTRYPOINT ["/app/entrypoint.sh"]

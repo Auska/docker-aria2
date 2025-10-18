@@ -44,5 +44,8 @@ else
 fi
 
 chown -R "$USER_NAME:$USER_NAME" /config || true
+chown -R "$USER_NAME:$USER_NAME" /www || true
+
+/usr/bin/gosu "$USER_NAME" /usr/bin/althttpd --root /www --port $WEB &
 
 exec /usr/bin/gosu "$USER_NAME" /usr/bin/aria2c --conf-path=/config/aria2.conf --rpc-listen-port=$RPC --listen-port=$PORT --dht-listen-port=$PORT --rpc-secret=$SECRET --bt-include-client-ids=$BTINCLUDE --bt-exclude-client-ids=$BTEXCLUDE --dir=$DOWNLOAD
