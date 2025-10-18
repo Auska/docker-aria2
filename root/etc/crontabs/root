@@ -1,5 +1,0 @@
-# do daily/weekly/monthly maintenance
-# min   hour    day     month   weekday command
-
-# run daily trackers-list update
-0 3 * * * /defaults/updatetrackers.sh 2>&1

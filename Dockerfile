@@ -1,28 +1,31 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:edge
+FROM alpine:latest
 
-# set version label
-ARG BUILD_DATE="2025-08-17"
-ARG VERSION="1.37.0-1"
-LABEL build_version="version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="Auska"
-
+ENV GOSU_VERSION=1.16
 ENV TZ=Asia/Shanghai
-ENV WEB=80
-ENV RPC=6800
-ENV PORT=16881 
-ENV TRACKERSAUTO=Yes
+ENV DOWNLOAD=/downloads
 ENV MODE=BT
+ENV RPC=6800
+ENV PORT=16881
+ENV UID=1000
+ENV GID=1000
+ENV BTINCLUDE="-,A2"
+ENV BTEXCLUDE="-SD,-XF,-QD,-BN,-DL,-XL"
 
 # copy local files
-COPY  root /
-COPY aria2c  /usr/bin/aria2c
-COPY webui /webui
+COPY app /app
+COPY aria2c /usr/bin/aria2c
 
 RUN \
-	echo "**** install packages ****" \
-	&& sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories \
-	&& apk add --no-cache curl darkhttpd
+	sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories && \
+    apk add --no-cache curl && \
+    chmod +x /app/entrypoint.sh && \
+    chmod +x /usr/bin/aria2c
+
+RUN curl -L "https://gh-proxy.net/https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64" -o /usr/bin/gosu && \
+    chmod +x /usr/bin/gosu
 
 # ports and volumes
-EXPOSE 6800 16881 80
+EXPOSE 6800 16881
 VOLUME /downloads /config
+
+ENTRYPOINT ["/app/entrypoint.sh"]

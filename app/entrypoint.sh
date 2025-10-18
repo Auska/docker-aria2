@@ -1,21 +1,28 @@
-#!/usr/bin/with-contenv bash
+#!/bin/sh
 
-mkdir -p /webui /mnt
-chmod +x /defaults/updatetrackers.sh
+set -e
 
-# copy
+UID=${UID:-1000}
+GID=${GID:-1000}
+USER_NAME=${USER_NAME:-abc}
+MODE=${MODE:-BT}
+SECRET=${SECRET:-admin}
 
-[[ ! -f /config/aria2.conf ]] && cp /defaults/aria2.conf /config/aria2.conf
+if ! getent group $GID > /dev/null 2>&1; then
+    addgroup -g $GID $USER_NAME
+fi
 
+if ! getent passwd $UID > /dev/null 2>&1; then
+    adduser -u $UID -G $USER_NAME -s /bin/sh -D $USER_NAME
+fi
+
+chown -R "$USER_NAME:$USER_NAME" /app || true
+
+[[ ! -f /config/aria2.conf ]] && cp /app/defaults/aria2.conf /config/aria2.conf
 [[ ! -f /config/aria2.session ]] && touch /config/aria2.session
-
 [[ ! -f /config/dht.dat ]] && touch /config/dht.dat
-
 [[ ! -f /config/dht6.dat ]] && touch /config/dht6.dat
 
-chown abc:abc /config/aria2.conf /config/aria2.session /config/dht.dat /config/dht6.dat
-
-# fix mode
 if [ $MODE == "PT" ]; then
     sed -i "s@max-overall-upload-limit=.*@max-overall-upload-limit=0@g" /config/aria2.conf
     sed -i "s@enable-dht=.*@enable-dht=false@g" /config/aria2.conf
@@ -36,18 +43,6 @@ else
     sed -i "s@bt-detach-seed-only=.*@bt-detach-seed-only=false@g" /config/aria2.conf
 fi
 
-# add tracker
-tmp=`curl -s https://trackerslist.com/best.txt`
-list=`echo $tmp | sed 's/[ ][ ]*/,/g'`
-if [ -z "`grep "bt-tracker" /config/aria2.conf`" ]; then
-    sed -i '$a bt-tracker='${list} /config/aria2.conf
-    echo add tracker ...
-else
-    sed -i "s@bt-tracker.*@bt-tracker=$list@g" /config/aria2.conf
-    echo update tracker ...
-fi
+chown -R "$USER_NAME:$USER_NAME" /config || true
 
-# permissions
-chown abc:abc -R \
-	/mnt \
-	/config
+exec /usr/bin/gosu "$USER_NAME" /usr/bin/aria2c --conf-path=/config/aria2.conf --rpc-listen-port=$RPC --listen-port=$PORT --dht-listen-port=$PORT --rpc-secret=$SECRET --bt-include-client-ids=$BTINCLUDE --bt-exclude-client-ids=$BTEXCLUDE --dir=$DOWNLOAD
